@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from "./$types";
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import { superValidate } from "sveltekit-superforms";
 import { signInFormSchema } from "./schema";
 import { zod } from "sveltekit-superforms/adapters";
@@ -27,13 +27,16 @@ export const actions: Actions = {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
-                redirectTo: "/auth/confirm",
+                redirectTo: "/auth/callback",
             },
         });
         if (error) {
             return fail(500, {
                 form,
             });
+        };
+        if (data.url) {
+            redirect(303, data.url);
         };
 
         return {
