@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
 import { superValidate } from "sveltekit-superforms";
-import { signInFormSchema } from "./schema";
+import { devSignInFormSchema } from "./dev-schema";
 import { zod } from "sveltekit-superforms/adapters";
 
 export const load: PageServerLoad = async ({ url, locals: { safeGetSession } }) => {
@@ -12,42 +12,36 @@ export const load: PageServerLoad = async ({ url, locals: { safeGetSession } }) 
     };
 
     return {
-        signInForm: await superValidate(zod(signInFormSchema)),
+        devSignInForm: await superValidate(zod(devSignInFormSchema)),
         url: url.origin,
     };
 };
 
 export const actions: Actions = {
     default: async (event) => {
-        const signInForm = await superValidate(event, zod(signInFormSchema));
+        const devSignInForm = await superValidate(event, zod(devSignInFormSchema));
         const {
             url,
             request,
             locals: { supabase },
         } = event;
-        if (!signInForm.valid) {
+        if (!devSignInForm.valid) {
             return fail(400, {
-                signInForm,
+                devSignInForm,
             });
         };
 
-        const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: "/auth/callback",
-            },
+        const { error } = await supabase.auth.signInWithOtp({
+            email: devSignInForm.data.email,
         });
         if (error) {
             return fail(500, {
-                signInForm,
+                devSignInForm,
             });
-        };
-        if (data.url) {
-            redirect(303, data.url);
         };
 
         return {
-            signInForm,
+            devSignInForm,
         };
     },
 };
