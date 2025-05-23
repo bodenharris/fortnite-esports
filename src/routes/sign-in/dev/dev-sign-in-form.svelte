@@ -8,11 +8,22 @@
         superForm,
     } from "sveltekit-superforms";
     import { zodClient } from "sveltekit-superforms/adapters";
+    import { toast } from "svelte-sonner";
 
     let { data }: { data: { devSignInForm: SuperValidated<Infer<DevSignInFormSchema>> } } = $props();
 
     const devSignInForm = superForm(data.devSignInForm, {
         validators: zodClient(devSignInFormSchema),
+        onUpdated: ({ form: f }) => {
+            if (f.valid) {
+                toast.success("Submitted");
+            } else {
+                toast.error("Please fix the errors in the form");
+            };
+        },
+        onError: ({ result }) => {
+            toast.error("Error");
+        },
     });
 
     const { form: devSignInFormData, enhance } = devSignInForm;
