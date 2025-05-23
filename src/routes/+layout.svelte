@@ -1,6 +1,7 @@
 <script lang="ts">
 	import "../app.css";
 	import { ModeWatcher } from "mode-watcher";
+	import { Toaster } from "$lib/components/ui/sonner";
 	import { invalidate } from "$app/navigation";
   	import { onMount } from "svelte";
 
@@ -19,5 +20,7 @@
 </script>
 
 <ModeWatcher defaultMode="dark"/>
+
+<Toaster richColors />
 
 {@render children()}
