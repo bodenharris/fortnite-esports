@@ -9,14 +9,28 @@
         superForm,
     } from "sveltekit-superforms";
     import { zodClient } from "sveltekit-superforms/adapters";
+    import { toast } from "svelte-sonner";
 
     let { data }: { data: PageData } = $props();
 
     const accountForm = superForm(data.accountForm, {
         validators: zodClient(accountFormSchema),
+        resetForm: false,
+        onUpdated: ({ form: f }) => {
+            if (f.valid) {
+                toast.success("Saved");
+            } else {
+                toast.error("Please fix the errors in the form");
+            };
+        },
+        onError: ({ result }) => {
+            toast.error("Something went wrong. Try again later.");
+        },
     });
 
     const { form: accountFormData, enhance } = accountForm;
+
+    $accountFormData.username = data.profile.username;
 </script>
 
 <form class="flex flex-col gap-4" method="POST" action="?/update" use:enhance>
@@ -24,7 +38,7 @@
         <Form.Control>
             {#snippet children({ props })}
                 <Form.Label>Username</Form.Label>
-                <Input {...props} bind:value={$accountFormData.username} defaultValue={data.profile.username} />
+                <Input {...props} bind:value={$accountFormData.username} />
             {/snippet}
         </Form.Control>
         <Form.Description>This is your public username.</Form.Description>
