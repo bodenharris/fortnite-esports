@@ -33,7 +33,7 @@
     $accountFormData.username = data.profile.username;
 </script>
 
-<form class="flex flex-col gap-4" method="POST" action="?/update" use:enhance>
+<form class="bg-card min-w-64 max-w-128 w-full flex flex-col gap-4 border rounded-lg p-4" method="POST" action="?/update" use:enhance>
     <Form.Field form={accountForm} name="username">
         <Form.Control>
             {#snippet children({ props })}

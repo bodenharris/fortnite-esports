@@ -7,8 +7,12 @@
     let { data }: { data: PageData } = $props();
 </script>
 
-<AccountForm {data} />
+<div class="flex flex-col gap-4 items-center my-16 mx-4">
 
-<form method="POST" action="?/sign-out" use:enhance>
-    <Button type="submit" variant="destructive">Sign out</Button>
-</form>
+    <AccountForm {data} />
+
+    <form method="POST" action="?/sign-out" use:enhance>
+        <Button type="submit" variant="destructive">Sign out</Button>
+    </form>
+
+</div>
