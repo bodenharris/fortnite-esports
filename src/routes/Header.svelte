@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
     import * as Sheet from "$lib/components/ui/sheet";
+    import Menu from "@lucide/svelte/icons/menu";
 
     let { isSignedIn }: { isSignedIn: boolean } = $props();
 </script>
@@ -21,7 +22,9 @@
             {/if}
         </Button>
         <Sheet.Root>
-            <Sheet.Trigger class="md:hidden">Open</Sheet.Trigger>
+            <Sheet.Trigger class="md:hidden">
+                <Menu />
+            </Sheet.Trigger>
             <Sheet.Content>
                 <nav class="h-full flex flex-col items-center justify-center gap-4">
                     <Sheet.Close>
