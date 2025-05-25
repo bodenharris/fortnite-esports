@@ -5,4 +5,6 @@
     let { data }: { data: PageData } = $props();
 </script>
 
-<DevSignInForm {data} />
+<div class="flex justify-center my-16 mx-4">
+    <DevSignInForm {data} />
+</div>

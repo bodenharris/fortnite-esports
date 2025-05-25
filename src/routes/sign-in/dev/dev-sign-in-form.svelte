@@ -29,7 +29,7 @@
     const { form: devSignInFormData, enhance } = devSignInForm;
 </script>
 
-<form method="POST" use:enhance>
+<form class="flex flex-col gap-4 max-w-96 w-full" method="POST" use:enhance>
     <Form.Field form={devSignInForm} name="email">
         <Form.Control>
             {#snippet children({ props })}
