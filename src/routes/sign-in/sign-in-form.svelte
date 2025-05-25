@@ -17,6 +17,6 @@
     const { form: signInFormData, enhance } = signInForm;
 </script>
 
-<form method="POST" use:enhance>
+<form class="w-full max-w-64 flex flex-col gap-4" method="POST" use:enhance>
     <Form.Button>Sign in with Google</Form.Button>
 </form>
