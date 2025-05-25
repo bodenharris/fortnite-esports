@@ -11,7 +11,7 @@
 
     <AccountForm {data} />
 
-    <form method="POST" action="?/sign-out" use:enhance>
+    <form method="POST" action="?/signout" use:enhance>
         <Button type="submit" variant="destructive">Sign out</Button>
     </form>
 
