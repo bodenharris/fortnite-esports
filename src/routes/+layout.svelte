@@ -1,5 +1,6 @@
 <script lang="ts">
 	import "../app.css";
+	import Header from "./Header.svelte";
 	import { ModeWatcher } from "mode-watcher";
 	import { Toaster } from "$lib/components/ui/sonner";
 	import { invalidate } from "$app/navigation";
@@ -22,5 +23,7 @@
 <ModeWatcher defaultMode="dark"/>
 
 <Toaster richColors />
+
+<Header isSignedIn={data.session ? true : false} />
 
 {@render children()}
