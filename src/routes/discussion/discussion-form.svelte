@@ -20,11 +20,21 @@
 </script>
  
 <form method="POST" use:enhance>
- <Form.Field {form} name="username">
+ <Form.Field {form} name="title">
   <Form.Control>
    {#snippet children({ props })}
-    <Form.Label>Username</Form.Label>
-    <Input {...props} bind:value={$formData.username} />
+    <Form.Label></Form.Label>
+    <Input {...props} bind:value={$formData.title} />
+   {/snippet}
+  </Form.Control>
+  <Form.FieldErrors />
+ </Form.Field>
+
+ <Form.Field {form} name="content">
+  <Form.Control>
+   {#snippet children({ props })}
+    <Form.Label></Form.Label>
+    <Input {...props} bind:value={$formData.content} />
    {/snippet}
   </Form.Control>
   <Form.Description>Add something to the discussion.</Form.Description>

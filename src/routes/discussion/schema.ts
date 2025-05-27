@@ -1,7 +1,9 @@
 import { z } from "zod";
  
 export const formSchema = z.object({
-    username: z.string().min(2).max(50),
+    title: z.string().min(2).max(50),
+    content: z.string().min(2).max(1000),
 });
  
 export type FormSchema = typeof formSchema;
+

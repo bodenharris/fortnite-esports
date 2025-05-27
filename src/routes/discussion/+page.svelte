@@ -4,7 +4,9 @@
  let { data }: { data: PageData } = $props();
 </script>
  
-<DiscussionForm {data} />
 <h1> 
     Welcome to discussions!
 </h1>
+
+<DiscussionForm {data} />
+
