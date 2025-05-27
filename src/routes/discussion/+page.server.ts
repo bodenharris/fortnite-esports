@@ -23,7 +23,9 @@ export const actions: Actions = {
   const {locals: { supabase }} = event;
   const { error } = await supabase
   .from('posts')
-  .insert({ id: Math.floor(Math.random() * 1000000), title: form.data.title, content: form.data.content})
+  .insert({ title: form.data.title, content: form.data.content})
+  if (error) console.log(error);
+
 
   return {
    form,
