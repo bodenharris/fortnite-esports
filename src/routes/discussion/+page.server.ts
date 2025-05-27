@@ -20,10 +20,11 @@ export const actions: Actions = {
   }
 
   // add post
-  const {locals: { supabase }} = event;
+  const {locals: { supabase, safeGetSession }} = event;
+  const {session} = await safeGetSession();
   const { error } = await supabase
   .from('posts')
-  .insert({ title: form.data.title, content: form.data.content})
+  .insert({ title: form.data.title, content: form.data.content, user_id: session?.user.id})
   if (error) console.log(error);
 
 
