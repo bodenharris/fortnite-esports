@@ -10,3 +10,24 @@
 
 <DiscussionForm {data} />
 
+{#if data.posts} 
+    {#each data.posts as post}
+    <div class="bg-white rounded-2xl shadow p-6 flex flex-col gap-4 max-w-xl mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800">{post.title}</h2>
+
+        <div class="flex items-center gap-3">
+           
+            <span class="text-lg font-medium text-gray-700">{post.karma}</span>
+            
+        </div>
+
+        <p class="text-gray-700 leading-relaxed">{post.content}</p>
+        </div>
+    {/each}
+{/if}
+
+
+
+
+
+

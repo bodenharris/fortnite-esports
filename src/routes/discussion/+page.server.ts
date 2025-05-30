@@ -4,9 +4,16 @@ import { superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 import { formSchema } from "./schema";
  
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
+const {locals: { supabase, safeGetSession }} = event;
+
+const { data, error } = await supabase
+  .from('posts')
+  .select()
+
  return {
   form: await superValidate(zod(formSchema)),
+  posts: data
  };
 };
  
